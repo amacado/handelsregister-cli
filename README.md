@@ -45,6 +45,29 @@ See a full list of all parameters and options by passing `--help` as option to t
 ```shell
 php handelsregister-cli --help
 ```
+```
+Usage:
+  app:interact [options] [--] [<language>]
+
+Arguments:
+  language                                     Language which is used for interaction with `Handelsregister`. [default: "DE"]
+
+Options:
+      --state[=STATE]                          Select zero, one or more federal states to search in. If none are passed, the search will not be limited to a specific state. Valid codes are based on iso:code:3166:DE. (multiple values allowed)
+      --keywords[=KEYWORDS]                    Search for company or keywords.
+      --keywords-option[=KEYWORDS-OPTION]      Select an option how `keywords` are treated; One of (all|any|exact). [default: "any"]
+      --keywords-match-similar                 If flag is set, similar matching keywords will be included in results.
+      --subsidiary-office[=SUBSIDIARY-OFFICE]  Subsidiary / registered office.
+      --include-deleted                        If flag is set, search results will also include deleted companies.
+      --only-branches                          If flag is set, search only for branches in accordance with new law.
+      --register-type[=REGISTER-TYPE]          Type of register.
+      --register-number[=REGISTER-NUMBER]      Company register number.
+      --register-court[=REGISTER-COURT]        Register court.
+      --legal-status[=LEGAL-STATUS]            Company legal status (input value is language-dependent).
+      --country[=COUNTRY]                      Country where the company is located (input value is language-dependent).
+      --postal-code[=POSTAL-CODE]              Postal code where the company is located.
+      --location[=LOCATION]                    Location/City where the company is located.
+```
 
 Perform a search with a selected court, register type and number (Deutsche Bahn AG):
 ```shell
@@ -88,10 +111,8 @@ php ./handelsregister-cli app:build
 ```
 
 ## Work in progress / ideas / TODO / bugs
-> [!INFO]
-> GitHub issues are used to track features, ideas and bugs. Feel free to contribute
-> via pull request or issue creation with bug reports and feature requests.
-
+GitHub [issues](https://github.com/amacado/handelsregister-cli/issues) are used to track features, ideas and bugs. Feel free to contribute
+via pull request or issue creation with bug reports and feature requests.
 
 [^1]: [https://www.gesetze-im-internet.de/hgb/__9.html](https://www.gesetze-im-internet.de/hgb/__9.html) (2024-10-04)
 [^2]: [https://www.handelsregister.de/rp_web/welcome.xhtml](https://www.handelsregister.de/rp_web/welcome.xhtml) | Auszug aus Nutzungsbedingungen (2024-10-04)
