@@ -1,0 +1,50 @@
+{
+    "name": "amacado/handelsregister-cli",
+    "description": "The unoffical php cli client for `Handelsregister` search.",
+    "keywords": ["handelsregister", "php", "laravel zero", "console", "cli"],
+    "type": "project",
+    "license": "Apache License 2.0",
+    "support": {
+        "issues": "https://github.com/amacado/handelsregister-cli/issues",
+        "source": "https://github.com/amacado/handelsregister-cli"
+    },
+    "authors": [
+        {
+            "name": "Clemens Bastian",
+            "email": "info@clemensbastian.de"
+        }
+    ],
+    "require": {
+        "php": "^8.2.0",
+        "laravel-zero/framework": "^11.0.0",
+        "nunomaduro/laravel-console-dusk": "^1.13"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.15.2",
+        "mockery/mockery": "^1.6.11",
+        "pestphp/pest": "^2.34.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "bin": ["handelsregister-cli"]
+}
