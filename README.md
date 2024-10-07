@@ -130,7 +130,7 @@ See [laravel-zero.com/docs/build-a-standalone-application](https://laravel-zero.
 php ./handelsregister-cli app:build
 ```
 
-## Work in progress / ideas / TODO / bugs
+## Work in progress / ideas / todo / bugs
 GitHub [issues](https://github.com/amacado/handelsregister-cli/issues) are used to track features, ideas and bugs. Feel free to contribute
 via pull request or issue creation with bug reports and feature requests.
 
