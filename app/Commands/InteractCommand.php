@@ -3,6 +3,7 @@
     namespace App\Commands;
 
     use App\Contracts\RenderableExceptionContract;
+    use App\Enums\DownloadTypes;
     use App\Enums\FederalState;
     use App\Enums\FormElementIdentifier;
     use App\Enums\FormElementKeywordOption;
@@ -10,6 +11,7 @@
     use App\Exceptions\MultipleSearchResultsUnsupportedException;
     use App\Exceptions\NoSearchResultsException;
     use App\Exceptions\RenderableConsoleException;
+    use App\Exceptions\UnknownDownloadTypeException;
     use App\Exceptions\UnknownLanguageException;
     use Facebook\WebDriver\Exception\TimeoutException;
     use Facebook\WebDriver\Remote\RemoteWebElement;
@@ -21,9 +23,8 @@
     use NunoMaduro\LaravelConsoleDusk\ConsoleBrowser;
     use function Laravel\Prompts\select;
 
-    class InteractCommand extends Command implements \Illuminate\Contracts\Console\PromptsForMissingInput
+    class InteractCommand extends Command
     {
-        use PromptsForMissingInput;
 
         /**
          * The name and signature of the console command.
@@ -32,6 +33,7 @@
          */
         protected $signature = 'handelsregister-cli
                                     {language=DE : Language which is used for interaction with `Handelsregister`.}
+                                    {download=AD : Select which file type you want to download (AD|CD|HD|SI).}
                                     
                                     {--state=* : Select zero, one or more federal states to search in. If none are passed, the search will not be limited to a specific state. Valid codes are based on iso:code:3166:DE.}
                                     
@@ -59,13 +61,6 @@
          */
         protected $description = 'Command line interaction with the `Handelsregister` advanced search form.';
 
-        protected function promptForMissingArgumentsUsing(): array
-        {
-            return [
-                'language' => static fn() => select('Please select the language for interaction with the `Handelsregister`.', Language::toOptions())
-            ];
-        }
-
         /**
          * Execute the console command.
          */
@@ -73,9 +68,12 @@
         {
             try {
                 $language = Language::tryFrom(Str::upper($this->argument('language')));
-                throw_if($language === null, UnknownLanguageException::class);
+                $downloadType = DownloadTypes::tryFrom(Str::upper($this->argument('download')));
 
-                $this->browse(function (ConsoleBrowser $browser) use ($language) {
+                throw_if($language === null, UnknownLanguageException::class);
+                throw_if($downloadType === null, UnknownDownloadTypeException::class);
+
+                $this->browse(function (ConsoleBrowser $browser) use ($language, $downloadType) {
                     /** @var \Laravel\Dusk\Browser $browser */
                     $browser = $browser;
 
@@ -118,19 +116,19 @@
                         // handle search results
                         ->waitFor('form#ergebnissForm', 30)
                         ->tap(self::fullPageScreenshot('result'))
-                        ->with('tbody#ergebnissForm\:selectedSuchErgebnisFormTable_data', static function (Browser $browser) {
+                        ->with('tbody#ergebnissForm\:selectedSuchErgebnisFormTable_data', static function (Browser $browser) use ($downloadType) {
                             $resultRows   = collect($browser->elements('tr[data-ri]'));
                             $countResults = $resultRows->count();
 
                             throw_if($countResults > 1, MultipleSearchResultsUnsupportedException::class, $countResults);
                             throw_if($countResults === 0, NoSearchResultsException::class);
 
-                            $browser->with('tr[data-ri="0"]', static function (Browser $browser) {
+                            $browser->with('tr[data-ri="0"]', static function (Browser $browser) use ($downloadType) {
                                 // TODO implement search result handling..
 
-                                // TODO for any reason currently only one download works at a time..
+                                // TODO implement multiple downloads per request
                                 $browser
-                                    ->clickLink('AD')
+                                    ->clickLink($downloadType->value)
                                     ->pause(5000)
                                     ->screenshot('download');
                             });

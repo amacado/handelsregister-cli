@@ -52,10 +52,11 @@ php handelsregister-cli --help
 ```
 ```
 Usage:
-  app:interact [options] [--] [<language>]
+  handelsregister-cli [options] [--] [<language> [<download>]]
 
 Arguments:
   language                                     Language which is used for interaction with `Handelsregister`. [default: "DE"]
+  download                                     Select which file type you want to download (AD|CD|HD|SI). [default: "AD"] 
 
 Options:
       --state[=STATE]                          Select zero, one or more federal states to search in. If none are passed, the search will not be limited to a specific state. Valid codes are based on iso:code:3166:DE. (multiple values allowed)
@@ -77,6 +78,11 @@ Options:
 Perform a search with a selected court, register type and number (Deutsche Bahn AG):
 ```shell
 php handelsregister-cli --register-type=HRB --register-number=50000 --register-court='Berlin (Charlottenburg)'
+```
+
+Perform a search with a selected court, register type and number (Deutsche Bahn AG) and download the structured xml data (`SI`): 
+```shell
+php handelsregister-cli DE SI --register-type=HRB --register-number=50000 --register-court='Berlin (Charlottenburg)'
 ```
 
 Perform a search in multiple federal states (`BW` Baden-Württemberg, `NI` Niedersachsen):
