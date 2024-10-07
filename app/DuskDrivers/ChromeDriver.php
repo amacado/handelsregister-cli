@@ -27,7 +27,7 @@
 
             // Allow downloading files from `Handelsregister` within CLI build
             $options->setExperimentalOption('prefs', [
-                'download.default_directory' => storage_path('laravel-console-dusk/downloads')
+                'download.default_directory' => storage_path('downloads')
             ]);
 
 

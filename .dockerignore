@@ -1,0 +1,14 @@
+# Ignore everything
+*
+
+# Allow files and directories
+!/app
+!/bootstrap
+!/config
+!/docker
+!/box.json
+!/composer.json
+!/composer.lock
+!/handelsregister-cli
+!/LICENSE.md
+!/README.md

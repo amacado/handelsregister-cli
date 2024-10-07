@@ -37,7 +37,7 @@ The CLI and source code is published under **Apache License 2.0** (see [LICENSE.
 
 # Usage
 The CLI must be executed using `php` this can be achieved either by locally installing php[^3] or using the provided
-Docker Container. For simplicity reasons the following examples are based on the standalone version.
+Docker Container. For readability the following examples are based on the standalone version.
 
 ## Parameters and examples
 See a full list of all parameters and options by passing `--help` as option to the CLI.
@@ -79,18 +79,19 @@ Perform a search in multiple federal states (`BW` Baden-Württemberg, `NI` Niede
 php handelsregister-cli --state=BW --state=NI
 ```
 
+### Docker Container (Quickstart) ![image](https://badgen.net/static/-/recommended?label&color=blue)
+Replace `${pwd}/storage` with a local path on your hostsystem where the downloaded files, logs and screenshots will be stored.
+Pass any additional parameters like `--help` at the end:
+```shell
+docker run --volume ${pwd}/handelsregister-cli-storage:/app/storage amacado/handelsregister-cli:latest [--help]
+```
+
 ### Standalone CLI
 #### Requirements
 * `"php": "^8.2.0"`
 * php extension `curl`
 * php extension `fileinfo`
 * php extension `zip`
-
-
-### Docker Container
-#### Requirements
-> [!IMPORTANT]
-> // TODO
 
 # Development
 ## Getting started
@@ -102,6 +103,11 @@ Connect to the development which allows you to interact with the cli:
 ```shell
 docker exec -it handelsregister-cli-development /bin/bash
 php ./handelsregister-cli -v
+```
+
+## Build production docker container
+```shell
+docker build -f .\docker\production\Dockerfile . -t amacado/handelsregister-cli:latest
 ```
 
 ## Build a standalone application

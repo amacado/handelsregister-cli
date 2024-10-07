@@ -2,6 +2,6 @@ services:
     development-environment:
         container_name: 'handelsregister-cli-development'
         build:
-            context: .
+            context: ./docker/development/Dockerfile
         volumes:
             - ./:/app
