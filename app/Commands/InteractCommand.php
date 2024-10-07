@@ -30,7 +30,7 @@
          *
          * @var string
          */
-        protected $signature = 'app:interact
+        protected $signature = 'handelsregister-cli
                                     {language=DE : Language which is used for interaction with `Handelsregister`.}
                                     
                                     {--state=* : Select zero, one or more federal states to search in. If none are passed, the search will not be limited to a specific state. Valid codes are based on iso:code:3166:DE.}

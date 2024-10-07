@@ -1,3 +1,8 @@
+# TL;DR
+```
+docker run --volume ${pwd}/handelsregister-cli-storage:/app/storage amacado/handelsregister-cli:latest --help
+```
+
 # About
 This is an **unofficial** CLI allowing to interact with [handelsregister.de](https://www.handelsregister.de/) as an alternative approach to
 the python CLI provided by [github.com/bundesAPI/handelsregister](https://github.com/bundesAPI/handelsregister).
@@ -80,7 +85,7 @@ php handelsregister-cli --state=BW --state=NI
 ```
 
 ### Docker Container (Quickstart) ![image](https://badgen.net/static/-/recommended?label&color=blue)
-Replace `${pwd}/storage` with a local path on your hostsystem where the downloaded files, logs and screenshots will be stored.
+Replace `${pwd}/handelsregister-cli-storage` with a local path on your hostsystem where the downloaded files, logs and screenshots will be stored.
 Pass any additional parameters like `--help` at the end:
 ```shell
 docker run --volume ${pwd}/handelsregister-cli-storage:/app/storage amacado/handelsregister-cli:latest [--help]
@@ -92,6 +97,9 @@ docker run --volume ${pwd}/handelsregister-cli-storage:/app/storage amacado/hand
 * php extension `curl`
 * php extension `fileinfo`
 * php extension `zip`
+
+> [!CAUTION]
+> Standalone CLI is a prototype and not yet fully functional. Usage of the Docker container (quickstart) is recommended.
 
 # Development
 ## Getting started
