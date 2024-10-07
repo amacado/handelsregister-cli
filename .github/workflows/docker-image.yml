@@ -24,7 +24,7 @@ jobs:
                 uses: docker/build-push-action@v6
                 with:
                     context: .
-                    file: ./docker/production/Dockerfile
+                    file: docker/production/Dockerfile
                     push: true
                     tags: amacado/handelsregister-cli:latest
 
