@@ -79,6 +79,8 @@
 
                     $browser
                         ->visit(config('app.api.url'))
+                        ->pause(1000)
+                        ->click('a#naviForm\:erweiterteSucheLink') // navigate to advanced search form
                         ->waitFor('form#form') // wait until advanced search form is loaded
                         ->tap(self::switchLanguage($language))
 
