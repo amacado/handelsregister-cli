@@ -67,6 +67,6 @@ return [
     */
 
     'api' => [
-        'url' => 'https://www.handelsregister.de/rp_web/erweitertesuche.xhtml'
+        'url' => 'https://www.handelsregister.de/rp_web/welcome.xhtml'
     ],
 ];
